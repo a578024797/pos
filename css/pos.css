@@ -31,6 +31,9 @@ ul{
 }
 /* end reset */
 /* layout */
+.pos_body{
+    min-width: 1800px;
+}
 .pos_container{
     width: 100%;
     height: 100%;
