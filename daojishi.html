@@ -10,21 +10,23 @@
 
 <body>
     <div id="soccerTime">
-        
+
     </div>
     <script src="./js/jquery1.11.3.js"></script>
     <script>
-         invokingTime("soccerTime", "2018-06-30 00:00:00");
-        /*要求 计算两个时间戳相减 然后拥有倒计时效果 只需要24小时内得计算
-                                    1. 模拟数据 随便用前一天得时间 与当前时间对比
-                                    2.  两个时间相减 当前时间-前一天时间 /1000 得到秒
+        invokingTime("soccerTime", "2018-06-30 00:00:00");
+        /*要求 计算两个时间戳相减 然后拥有倒计时效果
+                                    1. 模拟数据 随便用后一天得时间 与当前时间对比
+                                    2.  两个时间相减 前一天时间-当前时间  /1000 得到秒
                                     3.  得到秒 之后 setinterval 让time--  然后在函数中输出效果
                                     4.  当秒杀数小于0  就显示已超时
-          计算方式 second = 时间戳(默认秒) - 小时 - 分钟  所有单位都换成秒 
+          计算方式 second =  Math.floor(时间戳(默认秒)) - 小时 - 分钟  所有单位都换成秒 
+          兼容问题: 因为ios new date 不支持 - - 格式 从数据库取出得时间都是 - - 所以 把 - - 替换成 / /
+          red_xx
         */
         function invokingTime(id, time_out) {
 
-            let time_out_time = new Date(time_out).getTime();
+            let time_out_time = new Date(time_out.replace(/-/g, "/")).getTime();
             let nowTime = new Date().getTime();
             let total = (time_out_time - nowTime) / 1000;
 
@@ -35,18 +37,26 @@
                     let hour = Math.floor(times / (60 * 60)) - (day * 24); //小时
                     let minute = Math.floor(times / 60) - (day * 24 * 60) - (hour * 60); //秒
                     let second = Math.floor(times) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60); //秒
-                    /* ---------------------------- 小时:分钟:秒 */
+                    /* ----------------------------- 小时:分钟:秒 */
                     let newHour = Math.floor(times / (60 * 60))
                     let newMinute = Math.floor(times / 60) - (newHour * 60);
                     let newSecond = Math.floor(times) - (newHour * 60 * 60) - (newMinute * 60);;
-                    if (hour <= 9) hour = '0' + hour;
-                    if (minute <= 9) minute = '0' + minute;
-                    if (second <= 9) second = '0' + second;
-                    if (newHour <= 9) newHour = '0' + newHour;
-                    if (newMinute <= 9) newMinute = '0' + newMinute;
-                    if (newSecond <= 9) newSecond = '0' + newSecond;
-                    // $(`#${id}`).html(`${day}:${hour}:${minute}:${second}`);
-                    $(`#${id}`).html(`${newHour}:${newMinute}:${newSecond}`);
+                    /* ----------------------------- 时间小于10 前面加0*/
+                    /* ----------------------------- 效率貌似三元更好一点??? 没测试*/
+                    hour = hour < 10 ? "0" + hour : hour;
+                    minute = hour < 10 ? "0" + minute : minute;
+                    second = second < 10 ? "0" + second : second;
+                    newHour = newHour < 10 ? "0" + newHour : newHour;
+                    newMinute = newMinute < 10 ? "0" + newMinute : newMinute;
+                    newSecond = newSecond < 10 ? "0" + newSecond : newSecond;
+                    // if (hour < 10) hour = '0' + hour;
+                    // if (minute < 10) minute = '0' + minute;
+                    // if (second < 10) second = '0' + second;
+                    // if (newHour < 10) newHour = '0' + newHour;
+                    // if (newMinute < 10) newMinute = '0' + newMinute;
+                    // if (newSecond < 10) newSecond = '0' + newSecond;
+                    // $(`#${id}`).html(`${day}:${hour}:${minute}:${second}`);  天 小时 分 秒
+                    $(`#${id}`).html(`${newHour}:${newMinute}:${newSecond}`); // 小时 分 秒
                     times--;
                     if (times < 0) {
                         $(`#${id}`).html(`00:00:00`);
@@ -55,7 +65,7 @@
                         clearInterval(p);
 
                     }
-                },1000);
+                }, 1000);
                 // timer[id] = p;
             }
 
