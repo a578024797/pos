@@ -76,11 +76,25 @@ ul{
         height: calc(50% - 60px);
         font-size: 20px;
     }
+    .pos_major_content{
+        width: 100%;
+    }
+    .pos_major_key{
+        position: absolute;
+        left: 10px;
+        bottom: 0;
+        transform: translate(0,-25%);
+        width: 86%;
+        height: 50px;
+        background: #f3f3f3;
+        overflow: hidden;
+
+    }
     .pos_confirm{
         position: absolute;
-        left: 50%;
+        right: 10px;
         bottom: 0;
-        transform: translate(-50%,-25%);
+        transform: translate(0,-25%);
         padding: 0 0 0 10px;
         width: 100px;
         height: 50px;
