@@ -26,9 +26,130 @@ input {
 a {
     text-decoration: none;
 }
+ul{
+    list-style-type: none;
+}
 /* end reset */
 /* layout */
 .pos_container{
     width: 100%;
+    height: 100%;
+    font-size: 0;
+}
+.pos_box{
+    display:inline-block;
+    vertical-align: top;
+    font-size: 16px;
 }
 /* end  */
+/* pos_im_list */
+.pos_im_list_box{
+    width: 20%;
+}
+    .pos_im_list{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .pos_im_im{
+        width: 32%;
+    }
+    .pos_im_im img{
+        width: 100%;
+    }
+/* end */
+/* pos_major 中间部分 */
+    .pos_major{
+        width: 60%;  
+        height: 100%;
+    }
+    .pos_major_text{
+        position: relative;
+        width: calc(100% - 84px);
+        padding: 30px 42px;
+        background: url("../images/screen.PNG") no-repeat;
+        background-size: 100% 100%;
+        height: calc(50% - 60px);
+        font-size: 20px;
+    }
+    .pos_confirm{
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%,-25%);
+        padding: 0 0 0 10px;
+        width: 100px;
+        height: 50px;
+        text-align: center;
+        letter-spacing: 10px;
+        line-height: 50px;
+        border-radius: 10px;
+        background: #f3f3f3;
+        cursor: pointer;
+    }
+    .pos_major_operate{
+        background: url("../images/pos.png") no-repeat;
+        background-size: 100% 100%;
+        height: 50%;
+    }
+/*  :end*/
+
+/* pos list 列表 */
+        .pos_list{
+            width: calc(20% - 3px);
+            height: calc(100% - 3px);
+            border-left: #f3f3f3 3px solid;
+            border-top: #f3f3f3 3px solid;
+            
+        }
+        .pos_list ul{
+            width: 100%;
+            height: 100%;
+            overflow-x:hidden;
+            overflow-y:auto; 
+        }
+        .pos_list_title{
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #222222;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .pos_list ul li{
+            width: 100%;
+            /* height: 70px; */
+            /* line-height: 70px; */
+            padding: 20px 0;
+            border-bottom: 1px solid #f3f3f3;
+        }
+        .pos_list_no{
+            position: relative;
+            display: inline-block;
+            width: 20%;
+            height: 100%;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .pos_list_no::after{
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+            background: #f3f3f3;
+            z-index: -1;
+
+        }
+        .pos_list_content{
+            display: inline-block;
+            width: 76%;
+            height: 100%;
+            vertical-align: middle;
+        }
+/* end */
